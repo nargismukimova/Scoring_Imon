@@ -3,8 +3,9 @@ import streamlit as st
 
 file_path = "Scoring02.pkl.pkl"  
 
-with open(file_path, "rb") as file:
-    regressor = pickle.load(file)
+with open(file_path, "rb") as pickle_in:
+    regressor = pickle.load(pickle_in)
+
 
 
 
