@@ -20,14 +20,14 @@ def encode_education(Education):
     }
     return Education_mapping.get(Education, 0)
 
-def encode_type_of_client(Type_of_client):
+def encode_Type_of_client(Type_of_client):
     Type_of_client_mapping = {
         "Новый клиент": 0,
         "Старый клиент": 1
     }
-    return Type_of_client_mapping.get(type_of_client, 0)
+    return Type_of_client_mapping.get(Type_of_client, 0)
 
-def encode_type_of_business(type_of_business):
+def encode_Type_of_business(Type_of_business):
     Type_of_business_mapping = {
         "Потребительский кредит": 1,
         "Производство": 2,
@@ -35,7 +35,7 @@ def encode_type_of_business(type_of_business):
         "Торговля": 4,
         "Сельское хозяйство": 5
     }
-    return type_of_business_mapping.get(Type_of_business, 0)
+    return Type_of_business_mapping.get(Type_of_business, 0)
 
 Family_status_explanation = {
     "Married": 2,
@@ -47,13 +47,13 @@ Family_status_explanation = {
 def encode_Family_status(Family_status):
     return Family_status_explanation.get(Family_status, 0)
 
-def predict_credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business):
+def predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business):
     Education_encoded = encode_Education(Education)
     Type_of_client_encoded = encode_Type_of_client(Type_of_client)
     Type_of_business_encoded = encode_Type_of_business(Type_of_business)
     Family_status_encoded = encode_Family_status(Family_status)
     
-    input_data = [[Gender, Sum_issued, Period, Age, family_status_encoded, type_of_client_encoded, education_encoded, type_of_business_encoded]]
+    input_data = [[Gender, Sum_issued, Period, Age, Family_status_encoded, Type_of_client_encoded, Education_encoded, Type_of_business_encoded]]
     
     prediction = regressor.predict(input_data)
     return prediction
