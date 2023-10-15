@@ -44,14 +44,14 @@ Family_status_explanation = {
     "Divorced": 3
 }
 
-def encode_family_status(Family_status):
-    return family_status_explanation.get(Family_status, 0)
+def encode_Family_status(Family_status):
+    return Family_status_explanation.get(Family_status, 0)
 
 def predict_credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business):
-    education_encoded = encode_education(Education)
-    type_of_client_encoded = encode_type_of_client(Type_of_client)
-    type_of_business_encoded = encode_type_of_business(Type_of_business)
-    family_status_encoded = encode_family_status(Family_status)
+    Education_encoded = encode_Education(Education)
+    Type_of_client_encoded = encode_Type_of_client(Type_of_client)
+    Type_of_business_encoded = encode_Type_of_business(Type_of_business)
+    Family_status_encoded = encode_Family_status(Family_status)
     
     input_data = [[Gender, Sum_issued, Period, Age, family_status_encoded, type_of_client_encoded, education_encoded, type_of_business_encoded]]
     
