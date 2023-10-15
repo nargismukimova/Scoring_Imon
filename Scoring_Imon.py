@@ -1,7 +1,7 @@
 import pickle
 import streamlit as st
 
-file_path = "Scoring02.pkl.pkl"  
+file_path = "Scoring02.pkl"  
 
 with open(file_path, "rb") as pickle_in:
     regressor = pickle.load(pickle_in)
