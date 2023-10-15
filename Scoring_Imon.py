@@ -78,7 +78,7 @@ def main():
     Type_of_business = st.selectbox("Тип бизнеса:", options=["Потребительский кредит", "Производство", "Услуги", "Торговля", "Сельское хозяйство"])
     
     if st.button("Предсказать"):
-        prediction = predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business)
+        prediction = regressor.predict_Credit_approval([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business]])
         st.success(f"Предсказание: {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
 
 if __name__ == '__main__':
