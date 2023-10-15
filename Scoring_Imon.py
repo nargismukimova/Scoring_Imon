@@ -1,18 +1,9 @@
 import pickle
 import streamlit as st
-import joblib
 
-
+# Загрузка обученной модели
 with open("Scoring02.pkl", "rb") as pickle_in: 
     regressor = pickle.load(pickle_in)
-
-def credit_approval(gender, sum_issued, period, age, family_status, type_of_client, education, type_of_business):
-    prediction = regressor.predict([[gender, sum_issued, period, age, family_status, type_of_client, education, type_of_business]])
-    return prediction
-
-def main():
-    st.title("Прогноз выдачи кредита")
-    st.markdown("Учебная модель поможет предсказать одобрение выдачи кредита на основе введенных данных.")
 
 def encode_education(education):
     education_mapping = {
@@ -42,7 +33,6 @@ def encode_type_of_business(type_of_business):
     }
     return type_of_business_mapping.get(type_of_business, 0)
 
-
 family_status_explanation = {
     "Married": 2,
     "Single": 1,
@@ -61,9 +51,12 @@ def predict_credit_approval(gender, sum_issued, period, age, family_status, type
     
     input_data = [[gender, sum_issued, period, age, family_status_encoded, type_of_client_encoded, education_encoded, type_of_business_encoded]]
     
-    prediction = classifier.predict(input_data)
+    prediction = regressor.predict(input_data)
     return prediction
 
+def main():
+    st.title("Прогноз выдачи кредита")
+    st.markdown("Учебная модель поможет предсказать одобрение выдачи кредита на основе введенных данных.")
     
     gender = st.radio("Пол:", options=["Мужской", "Женский"])
     gender = 0 if gender == "Мужской" else 1
@@ -72,7 +65,6 @@ def predict_credit_approval(gender, sum_issued, period, age, family_status, type
     period = st.number_input("Период:", min_value=0)
     age = st.slider("Возраст:", min_value=0, max_value=100, step=1)
 
-    
     family_status = st.radio("Семейное положение:", options=["Married", "Single", "Widow/Widower", "Divorced"])
     
     type_of_client = st.radio("Тип клиента:", options=["Новый клиент", "Старый клиент"])
