@@ -4,7 +4,7 @@ import joblib
 
 
 with open("Scoring02.pkl", "rb") as pickle_in: 
-    classifier = pickle.load(pickle_in)
+    regressor = pickle.load(pickle_in)
 
 def credit_approval(gender, sum_issued, period, age, family_status, type_of_client, education, type_of_business):
     prediction = regressor.predict([[gender, sum_issued, period, age, family_status, type_of_client, education, type_of_business]])
