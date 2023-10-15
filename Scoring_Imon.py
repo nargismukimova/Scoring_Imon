@@ -1,10 +1,18 @@
 import pickle
 import streamlit as st
+import joblib
 
 
-with open("Scoring02.pkl", "rb") as pickle_in:  # Замените "ваш_файл.pkl" на имя вашего файла
+with open("Scoring02.pkl", "rb") as pickle_in: 
     classifier = pickle.load(pickle_in)
 
+def credit_approval(gender, sum_issued, period, age, family_status, type_of_client, education, type_of_business):
+    prediction = regressor.predict([[gender, sum_issued, period, age, family_status, type_of_client, education, type_of_business]])
+    return prediction
+
+def main():
+    st.title("Прогноз выдачи кредита")
+    st.markdown("Учебная модель поможет предсказать одобрение выдачи кредита на основе введенных данных.")
 
 def encode_education(education):
     education_mapping = {
@@ -56,9 +64,6 @@ def predict_credit_approval(gender, sum_issued, period, age, family_status, type
     prediction = classifier.predict(input_data)
     return prediction
 
-def main():
-    st.title("Прогноз выдачи кредита")
-    st.markdown("Учебная модель поможет предсказать одобрение выдачи кредита на основе введенных данных.")
     
     gender = st.radio("Пол:", options=["Мужской", "Женский"])
     gender = 0 if gender == "Мужской" else 1
