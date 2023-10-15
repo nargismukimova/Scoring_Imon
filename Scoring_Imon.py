@@ -42,7 +42,7 @@ Family_status_explanation = {
     "Single": 1,
     "Widow/Widower": 0,
     "Divorced": 3
-}
+    }
 
 def encode_Family_status(Family_status):
     return Family_status_explanation.get(Family_status, 0)
@@ -88,7 +88,7 @@ st.write(f"Выбранный пол: {'Мужской' if Gender == 0 else 'Ж�
     
     if st.button("Предсказать"):
         prediction = regressor.predict_Credit_approval([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business]])
-        st.success(f"Предсказание: {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
+    st.success(f"Предсказание: {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
 
 if __name__ == '__main__':
     main()
