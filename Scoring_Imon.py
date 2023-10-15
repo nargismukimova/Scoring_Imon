@@ -1,11 +1,12 @@
-import joblib
 import pickle
 import streamlit as st
 
+file_path = "Scoring02.pkl.pkl"  
+
+with open(file_path, "rb") as file:
+    regressor = pickle.load(file)
 
 
-with open("Scoring02.pkl", "rb") as file:
-    regressor = joblib.load(file)
 
 def encode_education(education):
     education_mapping = {
