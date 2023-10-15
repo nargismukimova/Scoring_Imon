@@ -62,8 +62,17 @@ def main():
     st.title("Прогноз выдачи кредита")
     st.markdown("Учебная модель поможет предсказать одобрение выдачи кредита на основе введенных данных.")
     
-    Gender = st.radio("Пол:", options=["Мужской", "Женский"])
-    Gender = 0 if Gender == "Мужской" else 1
+  
+    
+    Gender_options = ["Мужской", "Женский"]
+Gender_selected = st.radio("Пол:", options=Gender_options)
+
+
+Gender = 0 if Gender_selected == "Мужской" else 1
+
+
+st.write(f"Выбранный пол: {'Мужской' if Gender == 0 else 'Женский'}")
+    
     
     
     Sum_issued = st.number_input("Сумма выдачи кредита:", min_value=0.0, format="%.2f")
