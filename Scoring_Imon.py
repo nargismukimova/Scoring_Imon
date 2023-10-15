@@ -9,7 +9,7 @@ with open(file_path, "rb") as pickle_in:
 
 
 
-def encode_education(Education):
+def encode_Education(Education):
     Education_mapping = {
         "Высшее образование": 4,
         "Сред.спец.образ-ние": 3,
