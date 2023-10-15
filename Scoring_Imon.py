@@ -37,7 +37,7 @@ def encode_Type_of_business(Type_of_business):
     }
     return Type_of_business_mapping.get(Type_of_business, 0)
 
-Family_status_explanation = {
+    Family_status_explanation = {
     "Married": 2,
     "Single": 1,
     "Widow/Widower": 0,
@@ -65,13 +65,13 @@ def main():
   
     
     Gender_options = ["Мужской", "Женский"]
-Gender_selected = st.radio("Пол:", options=Gender_options)
+    Gender_selected = st.radio("Пол:", options=Gender_options)
 
 
-Gender = 0 if Gender_selected == "Мужской" else 1
+    Gender = 0 if Gender_selected == "Мужской" else 1
 
 
-st.write(f"Выбранный пол: {'Мужской' if Gender == 0 else 'Женский'}")
+    st.write(f"Выбранный пол: {'Мужской' if Gender == 0 else 'Женский'}")
     
     
     
@@ -87,8 +87,8 @@ st.write(f"Выбранный пол: {'Мужской' if Gender == 0 else 'Ж�
     Type_of_business = st.selectbox("Тип бизнеса:", options=["Потребительский кредит", "Производство", "Услуги", "Торговля", "Сельское хозяйство"])
     
     if st.button("Предсказать"):
-        prediction = regressor.predict_Credit_approval([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business]])
-    st.success(f"Предсказание: {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
+        prediction = regressor.predict_Credit_approval([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education,Type_of_business]])
+        st.success(f"Предсказание: {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
 
 if __name__ == '__main__':
     main()
