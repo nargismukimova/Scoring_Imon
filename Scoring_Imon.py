@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 import joblib
 
-model_selected = st.radio('What analysis do you want to use', ('KNeighborsClassifier',  'LogisticRegression', 'DecisionTreeClassifier', 'KNeighborsClassifier'))
+model_selected = st.radio('What analysis do you want to use', ('KNeighborsClassifier',  'LogisticRegression', 'DecisionTreeClassifier'))
 
 
 if model_selected == 'DecisionTreeClassifier':
@@ -46,7 +46,7 @@ def main():
     if st.button("Predict"):
         result=int(predict_note_authentication(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business)) 
           
-    st.success('Scoring system result is(1 - Кредит ободрен, 0 - Кредиту отказано) {}'.format(result))
+    st.success('Результат системы (1 - Кредит ободрен, 0 - Кредиту отказано) {}'.format(result))
                      
     
     
