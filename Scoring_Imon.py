@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 import joblib
 
-model_selected = st.radio('What analysis do you want to use', ('KNeighborsClassifier',  'LogisticRegression', 'DecisionTreeClassifier', 'RandomForestClassifier(without options)',  'RandomForestClassifier(with options)', 'Default'))
+model_selected = st.radio('What analysis do you want to use', ('KNeighborsClassifier',  'LogisticRegression', 'DecisionTreeClassifier', 'KNeighborsClassifier'))
 
 
 if model_selected == 'DecisionTreeClassifier':
@@ -13,13 +13,9 @@ if model_selected == 'DecisionTreeClassifier':
 elif model_selected in ['LogisticRegression', 'Default']:
     pickle_in = open("scoring_imon_LogReg.pkl","rb")
     classifier=pickle.load(pickle_in)
-elif model_selected == 'RandomForestClassifier(with options)':
-    pickle_in = open("scoring_imon_Forest(par).pkl","rb")
+elif model_selected in ['KNeighborsClassifier', 'Default']:
+    pickle_in = open("scoring_imon_KNeighborsClassifier.pkl","rb")
     classifier=pickle.load(pickle_in)
-elif model_selected == 'RandomForestClassifier(without options)':
-    pickle_in = open("scoring_imon_Forest.pkl","rb")
-    classifier=pickle.load(pickle_in)
-
 
 def predict_note_authentication(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business):
     prediction=classifier.predict([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business]])
@@ -50,7 +46,7 @@ def main():
     if st.button("Predict"):
         result=int(predict_note_authentication(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business)) 
           
-    st.success('Scoring system result is(1 - Длительность самой долгой единовременной просрочки в течение цикла > 20, 0 - Scoring system result is(1 - Длительность самой долгой единовременной просрочки в течение цикла <= 20) {}'.format(result))
+    st.success('Scoring system result is(1 - Кредит ободрен, 0 - Кредиту отказано) {}'.format(result))
                      
     
     
