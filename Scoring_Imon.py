@@ -5,9 +5,9 @@ import streamlit as st
 import joblib
 
 
-with open("Scoring02.pkl", "rb") as pickle_in:
-    regressor = pickle.load(pickle_in)
 
+pickle_in = open("Scoring02.pkl","rb")
+regressor=pickle.load(pickle_in)
 
 def predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business):
     prediction = regressor.predict([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business]])
