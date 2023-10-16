@@ -46,10 +46,9 @@ def main():
 
    
      
-       result=""
+    result=""
     if st.button("Predict"):
-        result=int(predict_note_authentication(Пол, Сумма_выдачи_номинал, Срок, Возраст_полные_года, Family_status, Type_of_client, Education, Tupe_of_business)) 
-     #st.success('The output is {}'.format(result))
+        result=int(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business) 
     st.success('Scoring system result is(1 - Длительность самой долгой единовременной просрочки в течение цикла > 20, 0 - Scoring system result is(1 - Длительность самой долгой единовременной просрочки в течение цикла <= 20) {}'.format(result))
                      
     
