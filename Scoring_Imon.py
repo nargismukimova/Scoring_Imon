@@ -4,10 +4,21 @@ import pandas as pd
 import streamlit as st
 import joblib
 
+if model_selected == 'DecisionTreeClassifier':
+    pickle_in = open("scoring_imon_ModelTree.pkl","rb")
+    classifier=pickle.load(pickle_in)
+elif model_selected in ['LogisticRegression', 'Default']:
+    pickle_in = open("scoring_imon_LogReg.pkl","rb")
+    classifier=pickle.load(pickle_in)
+elif model_selected == 'RandomForestClassifier(with options)':
+    pickle_in = open("scoring_imon_Forest(par).pkl","rb")
+    classifier=pickle.load(pickle_in)
+elif model_selected == 'RandomForestClassifier(without options)':
+    pickle_in = open("scoring_imon_Forest.pkl","rb")
+    classifier=pickle.load(pickle_in)
 
-
-pickle_in = open("Scoring02.pkl","rb")
-regressor=pickle.load(pickle_in)
+#pickle_in = open("Scoring02.pkl","rb")
+#regressor=pickle.load(pickle_in)
 
 def predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business):
     prediction = regressor.predict([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business]])
