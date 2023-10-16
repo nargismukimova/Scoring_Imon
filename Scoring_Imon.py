@@ -4,6 +4,9 @@ import pandas as pd
 import streamlit as st
 import joblib
 
+model_selected = st.radio('What analysis do you want to use', ('KNeighborsClassifier',  'LogisticRegression', 'DecisionTreeClassifier', 'RandomForestClassifier(without options)',  'RandomForestClassifier(with options)', 'Default'))
+
+
 if model_selected == 'DecisionTreeClassifier':
     pickle_in = open("scoring_imon_ModelTree.pkl","rb")
     classifier=pickle.load(pickle_in)
