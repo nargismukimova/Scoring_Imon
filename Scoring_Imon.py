@@ -1,14 +1,18 @@
 import numpy as np
 import pickle
-import pandas as pd
+import pandas as pd 
 import streamlit as st
 
-file_path = "Scoring02.pkl"  
 
-with open(file_path, "rb") as pickle_in:
-    regressor = pickle.load(pickle_in)
+pickle_in = open("Scoring02.pkl","rb")
+    regressor=pickle.load(pickle_in)
 
-
+def predict_Credit_approved(Gender, Sum_issued, Period, Age, Family_status_encoded, Type_of_client_encoded, Education_encoded, Type_of_business_encoded):
+    
+   
+    prediction=regressor.predict([[Gender, Sum_issued, Period, Age, Family_status_encoded, Type_of_client_encoded, Education_encoded, Type_of_business_encoded]])
+    print(prediction)
+    return prediction
 
 
 def encode_Education(Education):
