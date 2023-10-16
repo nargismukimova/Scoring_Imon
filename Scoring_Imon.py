@@ -32,8 +32,7 @@ def main():
     result=""
     if st.button("Предсказать"):
         result=int(predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business))
-    
-    st.success(f"Предсказание:  {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
+        st.success(f"Предсказание:  {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
      
      
  
