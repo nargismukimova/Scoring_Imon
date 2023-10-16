@@ -4,101 +4,38 @@ import pandas as pd
 import streamlit as st
 
 
-pickle_in = open("Scoring02.pkl","rb")
-regressor=pickle.load(pickle_in)
 
-def predict_Credit_approved(Gender, Sum_issued, Period, Age, Family_status_encoded, Type_of_client_encoded, Education_encoded, Type_of_business_encoded):
-    
-   
-    prediction=regressor.predict([[Gender, Sum_issued, Period, Age, Family_status_encoded, Type_of_client_encoded, Education_encoded, Type_of_business_encoded]])
-    print(prediction)
-    return prediction
+with open("Scoring02.pkl", "rb") as pickle_in:
+    regressor = pickle.load(pickle_in)
 
-
-def encode_Education(Education):
-    Education_mapping = {
-        "Высшее образование": 4,
-        "Сред.спец.образ-ние": 3,
-        "Среднее образование": 2,
-        "Непол Сред.образ": 1,
-        "Начал образование": 0,
-        "Аспирантура": 5
-    }
-    return Education_mapping.get(Education, 0)
-
-def encode_Type_of_client(Type_of_client):
-    Type_of_client_mapping = {
-        "Новый клиент": 0,
-        "Старый клиент": 1
-    }
-    return Type_of_client_mapping.get(Type_of_client, 0)
-
-def encode_Type_of_business(Type_of_business):
-    Type_of_business_mapping = {
-        "Потребительский кредит": 1,
-        "Производство": 2,
-        "Услуги": 3,
-        "Торговля": 4,
-        "Сельское хозяйство": 5
-    }
-    return Type_of_business_mapping.get(Type_of_business, 0)
-
-    Family_status_explanation = {
-    "Married": 2,
-    "Single": 1,
-    "Widow/Widower": 0,
-    "Divorced": 3
-    }
-
-def encode_Family_status(Family_status):
-    return Family_status_explanation.get(Family_status, 0)
 
 def predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business):
-    Education_encoded = encode_Education(Education)
-    Type_of_client_encoded = encode_Type_of_client(Type_of_client)
-    Type_of_business_encoded = encode_Type_of_business(Type_of_business)
-    Family_status_encoded = encode_Family_status(Family_status)
-    
-    input_data = [[Gender, Sum_issued, Period, Age, Family_status_encoded, Type_of_client_encoded, Education_encoded, Type_of_business_encoded]]
-    
-    prediction = regressor.predict(input_data)
+    prediction = regressor.predict([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business]])
     return prediction
-
-
 
 def main():
     st.title("Прогноз выдачи кредита")
     st.markdown("Учебная модель поможет предсказать одобрение выдачи кредита на основе введенных данных.")
     
-  
-    
-    Gender_options = ["Мужской", "Женский"]
-    Gender_selected = st.radio("Gender:", options=Gender_options)
-
-
-    Gender = 0 if Gender_selected == "Мужской" else 1
-
-
-    st.write(f"Gender: {'Мужской' if Gender == 0 else 'Женский'}")
     
     
-    
-    Sum_issued = st.number_input("Sum issued:", min_value=0.0, format="%.2f")
-    Period = st.number_input("Период:", min_value=0)
+    Gender = st.radio('Ваш пол?(0 - male, 1 - female)', (0, 1)) 
+    Sum_issued = st.number_input('Какая сумма выдачи номинала(используйте только цифры)?', step=1, value=0)
+    Period  = st.number_input('На какой срок вы хотите взять кредит?(используйте только цифры)?', step=1, value=0) 
     Age = st.slider("Age:", min_value=0, max_value=100, step=1)
+    Family_status = st.radio('Каков ваш семеный статус?(0 - Widow/Widower, 1 - Single, 2 - Married, 3 - Divorced)', (0, 1, 2, 3))
+    Type_of_client = st.radio('Какой вы клиент?(0 - Новый клиент, 1 - Старый клиент)', (0, 1))    
+    Education = st.radio('Какое у вас образование?(0 -  Начал образование, 1 - Непол Сред.образ,  2 - Среднее образование, 3 - Сред.спец.образ-ние, 4 - Высшее образование, 5 - Аспирантура)', (0, 1, 2, 3, 4, 5))
+    Type_of_business = st.radio('Какой у вас тип бизнеса?(1 - 1. Карзи истеъмоли/Потребительский кредит, 2 - 2. Истехсолот/Производство, 3 - 6. Хочагии кишлок / Сельское хозяйство, 4 - 3. Хизматрасони/Услуги, 5 - 4. Савдо / Торговля)', (1, 2, 3, 4, 5)) 
 
-    Family_status = st.radio("Family status:", options=["Married", "Single", "Widow/Widower", "Divorced"])
-    
-    Type_of_client = st.radio("Type of client:", options=["Новый клиент", "Старый клиент"])
 
-    Education = st.selectbox("Education:", options=["Высшее образование", "Сред.спец.образ-ние", "Среднее образование", "Непол Сред.образ", "Начал образование", "Аспирантура"])
-    Type_of_business = st.selectbox("Type of business:", options=["Потребительский кредит", "Производство", "Услуги", "Торговля", "Сельское хозяйство"])
+
     
     if st.button("Предсказать"):
-        prediction = predict_Credit_approval([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education,Type_of_business]])
-        st.success(f"Предсказание: {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
+        prediction = predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business)
+        st.success(f"Предсказание:  {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
 
-        
-    
 if __name__ == '__main__':
     main()
+     
+
