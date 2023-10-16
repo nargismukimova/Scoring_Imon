@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 import joblib
 
-model_selected = st.radio('What analysis do you want to use', ('KNeighborsClassifier',  'LogisticRegression', 'DecisionTreeClassifier'))
+model_selected = st.radio('What analysis do you want to use', ('DecisionTreeClassifier', 'LogisticRegression', 'KNeighborsClassifier'))
 
 
 if model_selected == 'DecisionTreeClassifier':
