@@ -60,6 +60,8 @@ def predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type
     prediction = regressor.predict(input_data)
     return prediction
 
+
+
 def main():
     st.title("Прогноз выдачи кредита")
     st.markdown("Учебная модель поможет предсказать одобрение выдачи кредита на основе введенных данных.")
@@ -89,8 +91,10 @@ def main():
     Type_of_business = st.selectbox("Type of business:", options=["Потребительский кредит", "Производство", "Услуги", "Торговля", "Сельское хозяйство"])
     
     if st.button("Предсказать"):
-        prediction = regressor.predict_Credit_approval([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education,Type_of_business]])
+        prediction = predict_Credit_approval([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education,Type_of_business]])
         st.success(f"Предсказание: {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
 
+        
+    
 if __name__ == '__main__':
     main()
