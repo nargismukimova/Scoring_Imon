@@ -2,7 +2,7 @@ import numpy as np
 import pickle
 import pandas as pd 
 import streamlit as st
-
+import joblib
 
 
 with open("Scoring02.pkl", "rb") as pickle_in:
@@ -29,12 +29,14 @@ def main():
     Type_of_business = st.radio('Какой у вас тип бизнеса?(1 - 1. Карзи истеъмоли/Потребительский кредит, 2 - 2. Истехсолот/Производство, 3 - 6. Хочагии кишлок / Сельское хозяйство, 4 - 3. Хизматрасони/Услуги, 5 - 4. Савдо / Торговля)', (1, 2, 3, 4, 5)) 
 
 
-
-    
+    result=""
     if st.button("Предсказать"):
-        prediction = predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business)
-        st.success(f"Предсказание:  {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
-
+        result=int(predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business))
+    
+    st.success(f"Предсказание:  {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
+     
+     
+ 
 if __name__ == '__main__':
     main()
      
