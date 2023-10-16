@@ -10,8 +10,8 @@ pickle_in = open("Scoring02.pkl","rb")
 regressor=pickle.load(pickle_in)
 
 def predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business):
-    result = regressor.predict([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business]])
-    return result
+    prediction = regressor.predict([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business]])
+    return prediction
 
 def main():
     st.title("Прогноз выдачи кредита")
@@ -29,9 +29,9 @@ def main():
     Type_of_business = st.radio('Какой у вас тип бизнеса?(1 - 1. Карзи истеъмоли/Потребительский кредит, 2 - 2. Истехсолот/Производство, 3 - 6. Хочагии кишлок / Сельское хозяйство, 4 - 3. Хизматрасони/Услуги, 5 - 4. Савдо / Торговля)', (1, 2, 3, 4, 5)) 
 
 
-    result=""
+    prediction=""
     if st.button("Предсказать"):
-        result=int(predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business))
+        prediction=int(predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business))
     st.success(f"Предсказание:  {'Кредит одобрен' if prediction[0] == 1 else 'Кредит не одобрен'}")
      
      
