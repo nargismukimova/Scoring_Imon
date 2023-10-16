@@ -1,4 +1,6 @@
+import numpy as np
 import pickle
+import pandas as pd
 import streamlit as st
 
 file_path = "Scoring02.pkl"  
@@ -65,26 +67,26 @@ def main():
   
     
     Gender_options = ["Мужской", "Женский"]
-    Gender_selected = st.radio("Пол:", options=Gender_options)
+    Gender_selected = st.radio("Gender:", options=Gender_options)
 
 
     Gender = 0 if Gender_selected == "Мужской" else 1
 
 
-    st.write(f"Выбранный пол: {'Мужской' if Gender == 0 else 'Женский'}")
+    st.write(f"Gender: {'Мужской' if Gender == 0 else 'Женский'}")
     
     
     
-    Sum_issued = st.number_input("Сумма выдачи кредита:", min_value=0.0, format="%.2f")
+    Sum_issued = st.number_input("Sum issued:", min_value=0.0, format="%.2f")
     Period = st.number_input("Период:", min_value=0)
-    Age = st.slider("Возраст:", min_value=0, max_value=100, step=1)
+    Age = st.slider("Age:", min_value=0, max_value=100, step=1)
 
-    Family_status = st.radio("Семейное положение:", options=["Married", "Single", "Widow/Widower", "Divorced"])
+    Family_status = st.radio("Family status:", options=["Married", "Single", "Widow/Widower", "Divorced"])
     
-    Type_of_client = st.radio("Тип клиента:", options=["Новый клиент", "Старый клиент"])
+    Type_of_client = st.radio("Type of client:", options=["Новый клиент", "Старый клиент"])
 
-    Education = st.selectbox("Образование:", options=["Высшее образование", "Сред.спец.образ-ние", "Среднее образование", "Непол Сред.образ", "Начал образование", "Аспирантура"])
-    Type_of_business = st.selectbox("Тип бизнеса:", options=["Потребительский кредит", "Производство", "Услуги", "Торговля", "Сельское хозяйство"])
+    Education = st.selectbox("Education:", options=["Высшее образование", "Сред.спец.образ-ние", "Среднее образование", "Непол Сред.образ", "Начал образование", "Аспирантура"])
+    Type_of_business = st.selectbox("Type of business:", options=["Потребительский кредит", "Производство", "Услуги", "Торговля", "Сельское хозяйство"])
     
     if st.button("Предсказать"):
         prediction = regressor.predict_Credit_approval([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education,Type_of_business]])
