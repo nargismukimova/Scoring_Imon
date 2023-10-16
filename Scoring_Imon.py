@@ -24,7 +24,7 @@ elif model_selected == 'RandomForestClassifier(without options)':
 #regressor=pickle.load(pickle_in)
 
 def predict_Credit_approval(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business):
-    prediction = regressor.predict([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business]])
+    prediction = classifier.predict([[Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business]])
     return prediction
 
 def main():
