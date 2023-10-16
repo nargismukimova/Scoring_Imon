@@ -46,8 +46,8 @@ def main():
     if st.button("Predict"):
         result=int(predict_note_authentication(Gender, Sum_issued, Period, Age, Family_status, Type_of_client, Education, Type_of_business)) 
           
-    #st.success('Результат системы (1 - Кредит ободрен, 0 - Кредиту отказано) {}'.format(result))
-    st.success('Результат скоринговой системы ====> Кредит одобрен' if result == 1 else 'Результат скоринговой системы ===> Кредит отказан')              
+    st.success('Результат системы (1 - Кредит ободрен, 0 - Кредиту отказано) {}'.format(result))
+           
     
     
     
